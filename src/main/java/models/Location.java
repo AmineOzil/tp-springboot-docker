@@ -1,10 +1,11 @@
 package models;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.*;
+import java.util.List;
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 @Entity(name="locations")
 @Access(AccessType.FIELD)
 public class Location {
@@ -46,4 +47,17 @@ public class Location {
 
     private double latitude,longitude;
     private String location_date;
+
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    @ManyToMany(mappedBy = "locations")
+    @JsonIgnore // Pour ne pas produire des cycles
+    private List<User> users;
 }
