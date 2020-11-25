@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import repositories.UserRepository;
 
 import java.util.List;
-
+@RequestMapping("/api/v1/users")
 @RestController
 public class UsersController {
     @Autowired
